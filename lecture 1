@@ -1,1 +1,21 @@
 # Machine-learning-with-R
+
+
+
+
+getwd()
+
+
+library(dplyr)
+library("xlsx")
+
+x<- read.xlsx("file_example_XLSX_5000.xlsx",sheetIndex = 1)
+
+print(x)
+names(x)
+View(x)
+
+x %>% select(-1) -> x
+x
+View(x)
+library(caTools)#for spliting the data in to two section which is true or false
