@@ -1,15 +1,10 @@
-# Machine-learning-with-R
-
-
-
-
 getwd()
 
 
 library(dplyr)
 library("xlsx")
 
-x<- read.xlsx("file_example_XLSX_5000.xlsx",sheetIndex = 1)
+x<- read.csv("car data.csv")
 
 print(x)
 names(x)
@@ -19,3 +14,7 @@ x %>% select(-1) -> x
 x
 View(x)
 library(caTools)#for spliting the data in to two section which is true or false
+
+sample.split(x$Transmission,SplitRatio = 0.65)->split_values
+subset(x,split_values==T)->train_set
+subset(x,split_values==F)->test_set
