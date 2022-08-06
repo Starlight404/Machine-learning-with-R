@@ -18,3 +18,21 @@ library(caTools)#for spliting the data in to two section which is true or false
 sample.split(x$Transmission,SplitRatio = 0.65)->split_values
 subset(x,split_values==T)->train_set
 subset(x,split_values==F)->test_set
+
+#loading part
+
+library(rpart)
+
+#bilding classification model
+
+rpart(Transmission~. ,data = train_set)->mod_class
+predict(mod_class,test_set,type = "class")->result_class
+table(test_set$Transmission,result_class)
+
+
+
+
+
+
+
+
