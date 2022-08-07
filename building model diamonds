@@ -1,0 +1,73 @@
+getwd()
+
+
+library(dplyr)
+library(xlsx)
+
+x<- read.csv("car data.csv")
+
+print(x)
+names(x)
+View(x)
+
+x %>% select(-1) -> x
+x
+View(x)
+library(caTools)#for spliting the data in to two section which is true or false
+
+sample.split(x$Transmission,SplitRatio = 0.65)->split_values
+subset(x,split_values==T)->train_set
+subset(x,split_values==F)->test_set
+
+
+nrow(train_set)
+
+
+nrow(test_set)
+
+
+
+
+#loading part
+
+library(rpart)
+
+#bulding classification model
+
+rpart(Transmission~. ,data = train_set)->mod_class
+predict(mod_class,test_set,type = "class")->result_class
+table(test_set$Transmission,result_class)
+
+#regression
+
+library(ggplot2)
+View(diamonds)
+??diamonds
+
+
+
+library(caTools)
+
+sample.split(diamonds$price,SplitRatio = 0.65)->split_values
+
+subset(diamonds,split_values==T)->train_regbset
+
+subset(diamonds,split_values==T)->train_reg
+subset(diamonds,split_values==F)->test_reg
+
+
+#building the model
+lm(price~. ,data = train_reg)->mod_regress
+predict(mod_regress,test_reg)->result_regress
+cbind(Actual = test_reg$price,predicted=result_regress)->final_data
+as.data.frame(final_data)->final_data
+
+View(final_data)
+
+#finding Error
+
+(final_data$Actual-final_data$predicted)->error
+cbind(final_data,error)->final_data
+View(final_data)
+rmse<- sqrt(mean(final_data$error^2))
+rmse
