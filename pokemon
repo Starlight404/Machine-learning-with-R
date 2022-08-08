@@ -11,6 +11,43 @@ print(x)
 names(x)
 View(x)
 
-x %>% select(-1) -> x
+x %>% select(-1) -> x#removing first column
 x
-View(x)
+
+
+##renaming the coloumn
+
+colnames(x)[2]<-"Primary_type"
+colnames(x)[3]<- "secondary_type"
+colnames(x)[5]<- "health_points"
+colnames(x)[8]<-"special_attack"
+colnames(x)[9]<- "special_defence"
+
+
+
+#understanding data
+
+str(x)
+
+as.factor(x$Legendary)->x$Legendary
+
+#making a table
+
+table(x$Primary_type)
+
+#selecting Grass 
+
+library(dplyr)
+x%>% filter(Primary_type=="Grass")->Grass_pokemon
+Grass_pokemon%>% filter(secondary_type=="Poison")->Gras_Poison_pokemon
+range(Gras_Poison_pokemon$Speed)
+Gras_Poison_pokemon%>%filter(Speed ==90)->My_Grass_pokemon
+
+
+My_Grass_pokemon
+
+
+
+
+
+
