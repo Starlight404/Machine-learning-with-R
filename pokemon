@@ -1,0 +1,16 @@
+
+getwd()
+
+
+library(dplyr)
+library(xlsx)
+
+x<- read.csv("Pokemon.csv")
+
+print(x)
+names(x)
+View(x)
+
+x %>% select(-1) -> x
+x
+View(x)
