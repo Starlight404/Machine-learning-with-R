@@ -44,10 +44,18 @@ range(Gras_Poison_pokemon$Speed)
 Gras_Poison_pokemon%>%filter(Speed ==90)->My_Grass_pokemon
 
 
-My_Grass_pokemon
+#selecting Water 
+
+x%>% filter(Primary_type=="Water")->Water_pokemon
+Water_pokemon%>% filter(secondary_type=="Psychic")->Water_Psychic_pokemon
+range(Water_Psychic_pokemon$Defense)#low is 65 and higher is 180
+Water_Psychic_pokemon%>% filter(Defense==180)->My_Water_pokemon
 
 
+#Selecting Fire pokemon
 
-
-
-
+x%>% filter(Primary_type=="Fire")->Fire_pokemon
+Fire_pokemon%>%filter(secondary_type=="Flying")->Fire_flying_pokemon
+range(Fire_flying_pokemon$special_attack)
+Fire_flying_pokemon%>%filter(special_attack==159)->My_fire_pokemon
+My_fire_pokemon
